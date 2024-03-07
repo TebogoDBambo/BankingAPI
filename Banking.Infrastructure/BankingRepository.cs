@@ -5,19 +5,28 @@ namespace Banking.Infrastructure
 {
     public class BankingRepository : IBankingRepository
     {
+        private BankingDbContext _bankingDbContext;
+
+        public BankingRepository(BankingDbContext bankingDbContext)
+        {
+            _bankingDbContext = bankingDbContext;
+        }
         public void CreateCustomerAccount(Customer customer)
         {
-            throw new NotImplementedException();
+            _bankingDbContext.Customer.Add(customer);
+            _bankingDbContext.SaveChanges();
         }
 
-        public long GetBalance(Account account)
+        public decimal GetBalance(Account account)
         {
-            throw new NotImplementedException();
+          var balance = _bankingDbContext.Account.FirstOrDefault(account).Balance;
+            return balance;
         }
 
-        public List<string> GetTransferHistory(Account account)
+        public List<Account> GetTransferHistory(Account account)
         {
-            throw new NotImplementedException();
+            var transferHistory = _bankingDbContext.Account.Where(x => x.AccountNumber == account.AccountNumber).ToList();
+            return transferHistory;
         }
 
         public void TransferAmounts(Account account1, Account account2, decimal amount)

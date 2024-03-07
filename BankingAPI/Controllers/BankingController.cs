@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Banking.Application;
+using Banking.Domain;
+using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -8,11 +10,20 @@ namespace BankingAPI.Controllers
     [ApiController]
     public class BankingController : ControllerBase
     {
+        private IBankingService _bankingService;
+
+        public BankingController(IBankingService bankingService)
+        {
+            _bankingService = bankingService;
+
+        }
         // GET: api/<BankingController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public ActionResult CreateCustomerAccount(Customer customer)
         {
-            return new string[] { "value1", "value2" };
+            _bankingService.CreateCustomerAccount(customer);
+
+            return Ok();
         }
 
         // GET api/<BankingController>/5

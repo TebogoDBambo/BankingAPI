@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Banking.Application
 {
-    public class BankingService : IBankingRepository
+    public class BankingService : IBankingService
     {
         private IBankingRepository _bankingRepository;
 
@@ -23,12 +23,12 @@ namespace Banking.Application
 
         }
 
-        public long GetBalance(Account account)
+        public decimal GetBalance(Account account)
         {
           return _bankingRepository.GetBalance(account); 
         }
 
-        public List<string> GetTransferHistory(Account account)
+        public List<Account> GetTransferHistory(Account account)
         {
            return _bankingRepository.GetTransferHistory(account);
         }

@@ -15,10 +15,10 @@ namespace Banking.Application
         void TransferAmounts(Account account1, Account account2, decimal amount);
 
         //- Retrieve balances for a given account.
-        long GetBalance(Account account);
+        decimal GetBalance(Account account);
 
         //- Retrieve transfer history for a given account.
-        List<string> GetTransferHistory(Account account);
+        List<Account> GetTransferHistory(Account account);
 
     }
 }
